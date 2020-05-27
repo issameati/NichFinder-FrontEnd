@@ -1,0 +1,34 @@
+.show-contact {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    padding: 1px 5px;
+    font-size: 12px;
+}
+
+img.icon {
+   
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin: -3px 8px 0 0;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 24px 24px;
+    vertical-align: middle;
+    position: relative;
+}
+/* a {
+    font-size: 16px;
+    color: #112953;
+    font-weight: 500;
+    font-family: Liberation Sans,sans-serif;
+  }
+ a:hover {
+    color: #0e2244;
+    border-bottom: solid 1px #e8983f ;
+  } */
+
+.middle-line {
+    text-decoration: line-through;
+}
