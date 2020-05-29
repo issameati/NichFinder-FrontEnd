@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 export default class Sidedrawer extends Component {
     state={
@@ -23,19 +24,19 @@ export default class Sidedrawer extends Component {
                 </h1>
                 <ul className="list-unstyled components mb-5">
                 <li className="active">
-                    <a href="#home"><span className="fa fa-th"></span>Applications</a>
+                    <Link to="/"><span className="fa fa-th"></span>Applications</Link>
                 </li>
                 <li>
-                    <a href="#home"><span className="fa fa-star"></span> Top charts</a>
+                    <Link to="/"><span className="fa fa-star"></span>Top charts</Link>
                 </li>
                 <li>
-                    <a href="#home"><span className="fa fa-cogs"></span> Services</a>
+                    <Link to="/"><span className="fa fa-cogs"></span> Services</Link>
                 </li>
                 <li>
-                    <a href="#home"><span className="fa fa-question-circle"></span> How To Use</a>
+                    <Link to="/"><span className="fa fa-question-circle"></span> How To Use</Link>
                 </li>
                 <li>
-                    <a href="#home"><span className="fa fa-paper-plane"></span> Contacts</a>
+                    <Link href="/"><span className="fa fa-paper-plane"></span> Contacts</Link>
                 </li>
                 </ul>
     

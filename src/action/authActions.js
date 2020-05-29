@@ -1,8 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 
-
-
 const authStart = () => {
     return {
         type: actionTypes.AUTH_START
@@ -15,9 +13,6 @@ const authSuccess = (user) => {
         user
     }
 }
-
-
-
 
 const authFail = (error) => {
     return {
@@ -47,6 +42,25 @@ const getMeFail = (error) => {
     }
 }
 
+const uploadStart = ()=>{
+    return {
+        type:actionTypes.UPLOAD_START
+    }
+}
+
+const uploadSuccess = (photo)=>{
+    return {
+        type:actionTypes.UPLOAD_SUCCESS,
+        photo
+    }
+}
+
+const uploadFail = (error)=>{
+    return {
+        type:actionTypes.UPLOAD_FAIL,
+        error
+    }
+}
 
 export const auth = (credentials) => async (dispatch) => {
 
@@ -133,15 +147,17 @@ export const updateMe = (payload) => async (dispatch) => {
     }
 }
 
-//Complet Upload User Image 
-// export const  uploadImage = (payload) => async (dispatch) =>{
-//     try {
-//         const res = await axios.post('http://localhost:5000/api/v1/auth/upload',,{
-//             headers:{
-//                 'Authorization': `Bearer ${payload.token}`
-//             }
-//         })
-//     } catch (err) {
-//         ///dispatch(getMeFail(err.response.data.error)) 
-//     }
-// }
+// Complet Upload User Image 
+export const  uploadImage = (token,data) => async (dispatch) =>{
+    dispatch(uploadStart())
+    try {
+        const res = await axios.put('http://localhost:5000/api/v1/auth/upload',data,{
+            headers:{
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        dispatch(uploadSuccess(res.data.photo)); 
+    } catch (err) {
+        dispatch(uploadFail(err.response.data.error)) 
+    }
+}

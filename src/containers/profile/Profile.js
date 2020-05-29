@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as authActionCreator from '../../action/authActions'
 import './style.css'
-import Axios from 'axios'
 class Profile extends Component {
 
     state = {
@@ -13,7 +12,6 @@ class Profile extends Component {
 		country:'Morocco',
 		prevUserDate:{
 		},
-		userImage:null
     }										
 
     componentDidMount(){
@@ -25,6 +23,7 @@ class Profile extends Component {
         if (nextProps.loading !== prevState.loading) {
 			
 	         return {
+				error:nextProps.error,
                 loading:nextProps.loading,
 				user:nextProps.user
             }
@@ -40,6 +39,7 @@ class Profile extends Component {
 		this.setState({edit:true})
 		this.BeforeChengeUser(this.props.user);
 	}
+
 	saveHandle =()=>{
 		const {user} = this.state
 		const {token} = this.props
@@ -59,13 +59,17 @@ class Profile extends Component {
 	}
 
 	changeHndle = (e)=>{
+
 		const newUser = {
 			[e.target.name]:e.target.value
 		}
 		this.setState({user:newUser})
 	}
-	handleFile =(e)=>{
-		this.setState({userImage:e.target.files['0']})
+	handleFile =(e)=> {
+
+		const data = new FormData();
+		data.append('file', e.target.files['0']);
+		this.props.uploadImage(this.props.token,data);
 	}
 	
     renderContent = ()=>{
@@ -75,19 +79,26 @@ class Profile extends Component {
         	content = (<div>loading...</div>)
            
 				}
-				else if(user) {
-
-          const {name,email} = this.state.user;
+		else if(user) {
+		  	const {error} = this.state;
+          	const {name,email,photo} = this.state.user;
             content = (
 						<React.Fragment>
 						
 							<div className='col-md-3 text-center' >
-								<img src="./assets/user-placeholder.jpg" width='60%' class="img-fluid rounded" alt="userpicture" />
+								<img src={ photo === '' ? "./assets/user-placeholder.jpg" : `http://localhost:5000/uploads/user/${photo}` } width='60%' class="img-fluid rounded" alt="userpicture" />
 								<div class="form-group">
 								  <label for=""></label>
-								  <input type="file" class="form-control-file" onChange={this.handleFile} name="picture" id="" placeholder="" aria-describedby="fileHelpId"/>
+								  <input type="file" class="form-control-file" onChange={this.handleFile} name="foo" id="" placeholder="" aria-describedby="fileHelpId"/>
+								  {error ? 
+								  (<div class="alert alert-warning" role="alert">
+									  <strong>{error} !!!</strong>
+								  </div> ): null}
+								 
+
 								</div>
 							</div>
+
 							<div className='col-md-9 user-info' >
 								<div class="row mb-4 " >
 										<div class="col-md-2 text-center" >
@@ -154,11 +165,13 @@ const mapStateToProps = (state)=>{
 		user:state.auth.user,
 		loading:state.auth.loading,
 		token:state.auth.token,
-		error:state.auth.token
+		error:state.auth.error
 }
 }
 
 const getMe = authActionCreator.getMe;
 const updateMe = authActionCreator.updateMe;
+const uploadImage = authActionCreator.uploadImage;
 
-export default connect(mapStateToProps,{getMe,updateMe})(Profile) 
+
+export default connect(mapStateToProps,{getMe,updateMe,uploadImage})(Profile) 

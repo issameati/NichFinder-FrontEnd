@@ -4,7 +4,8 @@ const initState ={
     userId: null,
     error: null,
     loading: false,
-    user:null
+    user:null,
+    
 }
 
 const authReducer = (state = initState, action ) =>{
@@ -47,6 +48,24 @@ const authReducer = (state = initState, action ) =>{
             user:action.user
         }    
         case actionTypes.GET_ME_FAIL: return {
+            ...state,
+            loading:false,
+            error:action.error,
+        }    
+        case actionTypes.UPLOAD_START: return {
+            ...state,
+            loading:true,
+        }     
+        case actionTypes.UPLOAD_SUCCESS: return {
+            ...state,
+            loading:false,
+            error: null,
+            user:{
+                ...state.user,
+                photo:action.photo
+            }
+        }    
+        case actionTypes.UPLOAD_FAIL: return {
             ...state,
             loading:false,
             error:action.error,

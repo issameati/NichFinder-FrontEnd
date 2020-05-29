@@ -14,16 +14,15 @@ import Profile from './containers/profile/Profile'
 import Logout from './containers/auth/Logout/Logout'
 import NotFound from './components/page/NotFound'
 
-
 import {CheckAuthState} from './action/authActions'
 
 
 class App extends Component {
 
-
   componentDidMount = () => {
     this.props.CheckAuthState();
   }
+  
   renderContent = () => {
 
     if (this.props.isAuth) {

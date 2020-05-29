@@ -18,3 +18,7 @@ export const CHECK_AUTH = 'CHECK_AUTH'
 export const GET_ME_START = 'GET_ME_START'
 export const GET_ME_SUCCESS = 'GET_ME_SUCCESS'
 export const GET_ME_FAIL = 'GET_ME_FAIL'
+
+export const UPLOAD_START = 'UPLOAD_START'
+export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS'
+export const UPLOAD_FAIL = 'UPLOAD_FAIL'

@@ -14,10 +14,10 @@ export default function Toolbar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="nav navbar-nav ml-auto">
                     <li className="nav-item active">
-                        <a className="nav-link" href="#home">HOME</a>
+                        <Link className="nav-link" to="/">HOME</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#home">MY LIST</a>
+                        <Link className="nav-link" to="/saved">Saved apps</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/me">PROFILE</Link>
