@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@amcharts/amcharts4": "^4.9.17",
+    "@amcharts/amcharts4": "^4.10.40",
     "@amcharts/amcharts4-geodata": "^4.1.14",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
